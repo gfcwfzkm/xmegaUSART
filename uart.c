@@ -1,8 +1,8 @@
 /*
- * uart.c
+ * uart.h
  * Version 1
- * Created: 14.12.2020
- *  Author: gfcwfzkm
+ * Created: 14.12.2019 18:07:06
+ *  Author: Pascal Gesell
  */ 
 
 #include "uart.h"
@@ -21,7 +21,7 @@ void uart_receive_interrupt(BUF_UART_t *temp)
 	if (temp == 0)	return;
 	
 	/* Statusregister abarbeiten */
-	status = (*temp->hw_usart).DATA;
+	status = (*temp->hw_usart).STATUS;
 	if (status & USART_BUFOVF_bm)	lastRxError |= UART_OVERRUN_ERROR;
 	if (status & USART_FERR_bm)		lastRxError |= UART_FRAME_ERROR;
 	if (status & USART_PERR_bm)		lastRxError |= UART_PARITY_ERROR;
